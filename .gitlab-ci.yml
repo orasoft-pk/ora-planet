@@ -1,0 +1,14 @@
+planitetsid:
+  stage: deploy
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - echo "Deploy to dev server"
+    - ssh-add <(echo "$SSH_KEY")
+    - rm -rf .git
+    - ssh -o StrictHostKeyChecking=no plannxrc@66.29.137.57 "cd /home/plannxrc/planetsid.com; git reset --hard; git pull origin main; composer install; php artisan cache:clear; php artisan route:clear; php artisan config:clear; php artisan view:cache;php artisan optimize;php artisan optimize:clear; exit"
+  only:
+    - main
