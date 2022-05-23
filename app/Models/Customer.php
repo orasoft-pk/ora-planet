@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 class Customer extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable = ['name','photo', 'zip', 'residency', 'city','password_api', 'address', 'phone', 'fax',
         'email','password','f_url','g_url','t_url','l_url','f_check','g_check','t_check','l_check',];

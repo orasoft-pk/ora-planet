@@ -6,9 +6,11 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\User;
+use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
-use App\Generalsetting;
+use App\Models\Generalsetting;
+use Illuminate\Support\Str;
 
 class UserForgotController extends Controller
 {
@@ -26,10 +28,10 @@ class UserForgotController extends Controller
     {
         $gs = Generalsetting::findOrFail(1);
     	$input =  $request->all();
-        if (User::where('email', '=', $request->email)->count() > 0) {
+        if (Customer::where('email', '=', $request->email)->count() > 0) {
             // user found
-            $user = User::where('email', '=', $request->email)->firstOrFail();
-            $autopass = str_random(8);
+            $user = Customer::where('email', '=', $request->email)->firstOrFail();
+            $autopass = str::random(8);
             $input['password'] = bcrypt($autopass);
 
             $user->update($input);
