@@ -102,3 +102,5 @@ Route::post('/search/shops', 'App\Http\Controllers\API\ShopsController@search_sh
 
 // Leopards
 Route::get('/charges/leopard/{product}/{vendor}/{city}', 'App\Http\Controllers\Shipping\LeopardsController@get_charges');
+
+Route::get('/test', 'App\Http\Controllers\Shipping\LeopardsController@test');
