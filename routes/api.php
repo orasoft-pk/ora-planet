@@ -109,4 +109,5 @@ Route::post('/customer_register', 'App\Http\Controllers\API\Auth\CustomerAuthCon
 Route::post('/customer_login', 'App\Http\Controllers\API\Auth\CustomerAuthController@customerlogin');
 Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_forgot');
 Route::post('/user_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@user_profile');
+Route::post('/shops', 'App\Http\Controllers\API\Auth\CustomerAuthController@shops');
 
