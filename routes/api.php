@@ -113,3 +113,5 @@ Route::post('/customer_login', 'App\Http\Controllers\API\Auth\CustomerAuthContro
 Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_forgot');
 
 Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_profile');
+
+
