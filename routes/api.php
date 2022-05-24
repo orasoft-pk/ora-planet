@@ -115,3 +115,4 @@ Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthContr
 Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_profile');
 
 
+//tedst
