@@ -104,10 +104,13 @@ Route::post('/search/shops', 'App\Http\Controllers\API\ShopsController@search_sh
 Route::get('/charges/leopard/{product}/{vendor}/{city}', 'App\Http\Controllers\Shipping\LeopardsController@get_charges');
 
 
+Route::get('/test', 'App\Http\Controllers\Shipping\LeopardsController@test');
+
+
 //Customer
 Route::post('/customer_register', 'App\Http\Controllers\API\Auth\CustomerAuthController@register');
 Route::post('/customer_login', 'App\Http\Controllers\API\Auth\CustomerAuthController@customerlogin');
 Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_forgot');
 Route::post('/user_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@user_profile');
 
-
+Route::post('/shops', 'App\Http\Controllers\API\Auth\CustomerAuthController@shops');
