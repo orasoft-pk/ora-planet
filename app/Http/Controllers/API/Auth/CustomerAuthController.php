@@ -63,12 +63,11 @@ class CustomerAuthController extends Controller
 
   public function register(Request $request)
   {
-    $validator=  $request->validate([
-      'name' => 'required',
-      'email' => 'required|email|unique:customers',
-      'password' => 'required',
-      'c_password' => 'required|same:password',
-    ]);
+   
+    if(!$request->name && !$request->email && !$request->password && !$request->c_password)
+    {
+      return response(['error'=>1,'data'=>'','message'=>'Missing parameters or invalid field'], 400);
+    }
 
     $input = $request->all();
     $input['password'] = bcrypt($input['password']);
@@ -133,6 +132,20 @@ class CustomerAuthController extends Controller
 
     }
 
+  public function customer_profile(Request $request)
+  {
+    if($request->customer_id =="")
+    {
+       return response(['error'=>1,'data'=>'','message'=>'Missing parameters'], 400);
+    }
 
+    $customer_profile= Customer::where('id',$request->customer_id)->first();
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'customer_profile' => $customer_profile,
+    ]);
+    
+  }
 
 }
