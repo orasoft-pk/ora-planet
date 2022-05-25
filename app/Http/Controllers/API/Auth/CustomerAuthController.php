@@ -32,11 +32,7 @@ class CustomerAuthController extends Controller
       ]);
       $credentials = request(['email', 'password']);
       if (!Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])) {
-        return response()->json([
-          'status_code' => 500,
-          'status' => 0,
-          'message' => 'Unauthorized'
-        ]);
+         return response(['error'=>1,'data'=>'','message'=>'invalid email or password'], 400);
       }
       $customer = Customer::where('email', $request->email)->first();
 
