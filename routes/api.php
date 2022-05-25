@@ -120,7 +120,3 @@ Route::get('/categories', 'App\Http\Controllers\API\Customer\CategoryController@
 Route::post('/product_search', 'App\Http\Controllers\API\Customer\CategoryController@search');
 Route::post('/road_search', 'App\Http\Controllers\API\Customer\CategoryController@road_search');
 
-<<<<<<< Updated upstream
-//tedst
-=======
->>>>>>> Stashed changes
