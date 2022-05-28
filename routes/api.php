@@ -52,8 +52,8 @@ Route::post('/userentercode', 'App\Http\Controllers\API\Auth\AuthController@user
 Route::post('/index', 'App\Http\Controllers\API\FrontendController@index');
 Route::get('/getcategories', 'App\Http\Controllers\API\FrontendController@getcategories');
 //festivals
-Route::get('/festivals', 'App\Http\Controllers\API\FrontendController@fastival');
-Route::post('/festivals', 'App\Http\Controllers\API\FrontendController@addfestivals');
+// Route::get('/festivals', 'App\Http\Controllers\API\FrontendController@fastival');
+// Route::post('/festivals', 'App\Http\Controllers\API\FrontendController@addfestivals');
 //top brand
 Route::get('/topbrand', 'App\Http\Controllers\API\FrontendController@topBrand');
 Route::post('/topbrand/{id}', 'App\Http\Controllers\API\FrontendController@topshopdetails');
@@ -114,9 +114,12 @@ Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthContr
 
 Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_profile');
 
-Route::get('/shops', 'App\Http\Controllers\API\Customer\CategoryController@shops');
-Route::get('/countries', 'App\Http\Controllers\API\Customer\CategoryController@countries');
-Route::get('/categories', 'App\Http\Controllers\API\Customer\CategoryController@categories');
-Route::post('/product_search', 'App\Http\Controllers\API\Customer\CategoryController@search');
-Route::post('/road_search', 'App\Http\Controllers\API\Customer\CategoryController@road_search');
+Route::get('/shops', 'App\Http\Controllers\API\Customer\FrontendController@shops');
+Route::get('/countries', 'App\Http\Controllers\API\Customer\FrontendController@countries');
+Route::get('/categories', 'App\Http\Controllers\API\Customer\FrontendController@categories');
+Route::post('/product_search', 'App\Http\Controllers\API\Customer\FrontendController@search');
+Route::post('/road_search', 'App\Http\Controllers\API\Customer\FrontendController@road_search');
+Route::get('/brands', 'App\Http\Controllers\API\Customer\FrontendController@brands');
+Route::get('/festivels', 'App\Http\Controllers\API\Customer\FrontendController@festivels');
+Route::get('/about', 'App\Http\Controllers\API\Customer\FrontendController@about');
 
