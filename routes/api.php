@@ -117,9 +117,14 @@ Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthCont
 Route::get('/shops', 'App\Http\Controllers\API\Customer\FrontendController@shops');
 Route::get('/countries', 'App\Http\Controllers\API\Customer\FrontendController@countries');
 Route::get('/categories', 'App\Http\Controllers\API\Customer\FrontendController@categories');
-Route::post('/product_search', 'App\Http\Controllers\API\Customer\FrontendController@search');
-Route::post('/road_search', 'App\Http\Controllers\API\Customer\FrontendController@road_search');
+Route::get('/product_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@search');
+Route::get('/road_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@road_search');
 Route::get('/brands', 'App\Http\Controllers\API\Customer\FrontendController@brands');
 Route::get('/festivels', 'App\Http\Controllers\API\Customer\FrontendController@festivels');
 Route::get('/about', 'App\Http\Controllers\API\Customer\FrontendController@about');
+Route::get('/groceries', 'App\Http\Controllers\API\Customer\FrontendController@groceries');
 
+ Route::prefix('advance_search')->group(function () {
+Route::get('/', 'App\Http\Controllers\API\Customer\FrontendController@advance_search');
+Route::get('/product', 'App\Http\Controllers\API\Customer\FrontendController@productsearch');
+});

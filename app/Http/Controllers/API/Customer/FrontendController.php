@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\Page;
+use App\Models\State;
 
 
 class FrontendController extends Controller
@@ -58,10 +59,10 @@ class FrontendController extends Controller
       ]);
   }
 
-   public function search(Request $request)
+   public function search($id)
   {
     
-    $search = Product::where('status', '=', 1)->where('name', 'like', '%' . $request->product . '%')->get();
+    $search = Product::where('status', '=', 1)->where('name', 'like', '%' . $id . '%')->get();
 
     return response()->json([
         'status_code' => 200,
@@ -71,10 +72,10 @@ class FrontendController extends Controller
   
   }
 
-  public function road_search(Request $request)
+  public function road_search($id)
   {
 
-    $vendors = User::where('shop_address', 'like', "%{$request->shop_address}%")->orWhere('shop_name', 'like', "%{$request->shop_name}%")->orderBy('id', 'desc')->get();
+    $vendors = User::where('shop_address', 'like', "%{$id}%")->orWhere('shop_name', 'like', "%{$id}%")->orderBy('id', 'desc')->get();
 
     return response()->json([
         'status_code' => 200,
@@ -132,6 +133,68 @@ class FrontendController extends Controller
             'about'=>$page,
 
         ]);
+    }
+
+     public function groceries()
+  {
+    
+    $groceries = Product::where('status', '=', 1)->where('category_id',13)->get();
+
+    return response()->json([
+        'status_code' => 200,
+        'status' => 1,
+        'groceries' => $groceries,
+      ]);
+  
+  }
+
+  public function advance_search()
+    {
+        $states = State::all();
+        $country = new Country;
+        $countries = $country->get_countries();
+        $category= Category::all();
+
+
+        return response()->json([
+        'status_code' => 200,
+        'status' => 1,
+        'data' => ["categories"=>$category,"countries"=>$countries],
+      ]);
+
+    }
+
+    public function productsearch(Request $request)
+    {
+        $min      = $request->min;
+        $max      = $request->max;
+        $name     = $request->name;
+        $category = $request->category;
+
+         $products = Product::query();
+        
+        if($name)
+        {
+          $products->orWhere('name', 'like' ,'%{$name}%');
+        }
+        if ($category) 
+        {
+          $products->orWhere('category_id',$category);
+        }
+        if($min && $max)
+        {
+          $products->whereBetween('cprice', [$min, $max]);
+        }
+        
+        $products->get();
+
+
+        return response()->json([
+        'status_code' => 200,
+        'status' => 1,
+        'data' => ["products"=>$products],
+      ]);   
+
     }
 
 
