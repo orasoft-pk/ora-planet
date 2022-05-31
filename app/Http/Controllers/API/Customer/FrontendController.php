@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Product;
 use App\Models\Page;
 use App\Models\State;
+use App\Models\Slider;
 
 
 class FrontendController extends Controller
@@ -196,6 +197,61 @@ class FrontendController extends Controller
       ]);   
 
     }
+
+    public function sliders()
+  {
+    $sliders_obj = Slider::all();
+    $sliders = [];
+    $base_url = url('/') . '/assets/images/';
+    foreach ($sliders_obj as $slider)
+      array_push($sliders, $base_url . $slider->photo);
+
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => $sliders
+    ]);
+  }
+
+   public function featured_shops(Request $request)
+  {
+    $shops_list = User::all()->where('top_rated','=',1);
+    $shops = [];
+    foreach ($shops_list as $shop){
+      array_push($shops, $shop);
+    }
+
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => $shops,
+    ]);
+  }
+
+  public function hot_sale()
+    {
+        $hot_sale = Product::where('hot','==',1)->get();
+
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => $hot_sale,
+    ]);
+
+  }
+
+  public function deals_of_the_day()
+    {
+      $deals_of_the_day = Product::where('deal_of_the_day','==',1)->get();
+
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => $deals_of_the_day,
+    ]);
+
+    }
+
 
 
 

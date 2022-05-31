@@ -123,8 +123,13 @@ Route::get('/brands', 'App\Http\Controllers\API\Customer\FrontendController@bran
 Route::get('/festivels', 'App\Http\Controllers\API\Customer\FrontendController@festivels');
 Route::get('/about', 'App\Http\Controllers\API\Customer\FrontendController@about');
 Route::get('/groceries', 'App\Http\Controllers\API\Customer\FrontendController@groceries');
+Route::get('/home_sliders', 'App\Http\Controllers\API\Customer\FrontendController@sliders');
+Route::get('/featured_shops', 'App\Http\Controllers\API\Customer\FrontendController@featured_shops');
+Route::get('/hot_sale', 'App\Http\Controllers\API\Customer\FrontendController@hot_sale');
+Route::get('/deals_of_the_day', 'App\Http\Controllers\API\Customer\FrontendController@deals_of_the_day');
 
- Route::prefix('advance_search')->group(function () {
+
+Route::prefix('advance_search')->group(function () {
 Route::get('/', 'App\Http\Controllers\API\Customer\FrontendController@advance_search');
 Route::get('/product', 'App\Http\Controllers\API\Customer\FrontendController@productsearch');
 });
