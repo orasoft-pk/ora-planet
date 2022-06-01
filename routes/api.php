@@ -127,6 +127,7 @@ Route::get('/home_sliders', 'App\Http\Controllers\API\Customer\FrontendControlle
 Route::get('/featured_shops', 'App\Http\Controllers\API\Customer\FrontendController@featured_shops');
 Route::get('/hot_sale', 'App\Http\Controllers\API\Customer\FrontendController@hot_sale');
 Route::get('/deals_of_the_day', 'App\Http\Controllers\API\Customer\FrontendController@deals_of_the_day');
+Route::get('/shops_details/{slug}', 'App\Http\Controllers\API\Customer\FrontendController@shops_details');
 
 
 Route::prefix('advance_search')->group(function () {
