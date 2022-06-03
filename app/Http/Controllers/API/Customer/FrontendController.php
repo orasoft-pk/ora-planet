@@ -256,12 +256,13 @@ class FrontendController extends Controller
     {
       $string = str_replace('-', ' ', $slug);
       $vendor = User::all()->where('shop_name','=',$string)->first();
-      $vprods = $vendor->products()->where('status','=',1)->orderBy('id','desc')->get();
+      
+     $sliders= $vendor->sliders;
 
     return response()->json([
       'status_code' => 200,
       'status' => 1,
-      'data' => $vprods,
+      'data' => $sliders,
     ]);
 
     }
