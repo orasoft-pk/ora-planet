@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Page;
 use App\Models\State;
 use App\Models\Slider;
+use App\Models\Review;
 
 
 class FrontendController extends Controller
@@ -261,14 +262,16 @@ class FrontendController extends Controller
 
       $vprods = $vendor->products()->where('status','=',1)->orderBy('id','desc')->get();
 
-      $offers_of_day = $vendor->products()->where('status','=',1)->where('shop_status','=',2)->orderBy('id','desc')->limit(9)->get('photo');
+      $offers_of_day = $vendor->products()->where('status','=',1)->where('shop_status','=',2)->orderBy('id','desc')->limit(9)->with('reviews')->get();
 
-      $discount_items = $vendor->products()->where('status','=',1)->where('shop_status','=',1)->orderBy('id','desc')->limit(9)->get('photo');
+    
 
-      $sale_items = User::all()->where('shop_name','=',$string)->first();
+      $discount_items = $vendor->products()->where('status','=',1)->where('shop_status','=',1)->orderBy('id','desc')->limit(9)->with('reviews')->get();
+
+      $sale_items = $vendor->products()->where('status','=',1)->where('shop_status','=',0)->orderBy('id','desc')->limit(9)->with('reviews')->get();
 
 
-      $nearest_shops = User::where('frenchise_id','=',$vendor->frenchise_id)->inRandomOrder()->limit(12)->get('logo');
+      $nearest_shops = User::where('frenchise_id','=',$vendor->frenchise_id)->inRandomOrder()->limit(12)->get();
 
       
     return response()->json([
