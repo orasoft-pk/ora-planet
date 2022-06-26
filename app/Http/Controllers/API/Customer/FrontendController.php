@@ -282,6 +282,28 @@ class FrontendController extends Controller
 
     }
 
+     public function cities_shops(Request $request, $slug)
+    {
+        $sort = "";
+        $reservedSymbols = ['-', '_', '+', '<', '>', '@', '(', ')', '~'];
+        $searchTerm = str_replace($reservedSymbols, ' ', $slug);
+        $searchValues = preg_split('/\s+/', $searchTerm, -1, PREG_SPLIT_NO_EMPTY);
+
+        $vendors = User::where(function ($q) use ($searchValues) {
+            foreach ($searchValues as $value) {
+                $q->orWhere('city', 'like', "%{$value}%")->orWhere('shop_address', 'like', "%{$value}%");
+            }
+        })->orderBy('id', 'desc')->get();
+
+      return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => $vendors,
+    ]);
+
+        
+    }
+
 
 
 
