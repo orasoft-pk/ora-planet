@@ -258,27 +258,46 @@ class FrontendController extends Controller
       $string = str_replace('-', ' ', $slug);
       $vendor = User::all()->where('shop_name','=',$string)->first();
       
+      if($vendor){
       $sliders= $vendor->sliders;
+      }
 
+      if($vendor){
       $vprods = $vendor->products()->where('status','=',1)->orderBy('id','desc')->get();
+      }
 
+      if($vendor){
       $offers_of_day = $vendor->products()->where('status','=',1)->where('shop_status','=',2)->orderBy('id','desc')->limit(9)->with('reviews')->get();
+      }
 
     
-
+      if($vendor){
       $discount_items = $vendor->products()->where('status','=',1)->where('shop_status','=',1)->orderBy('id','desc')->limit(9)->with('reviews')->get();
+      }
 
+      if($vendor){
       $sale_items = $vendor->products()->where('status','=',1)->where('shop_status','=',0)->orderBy('id','desc')->limit(9)->with('reviews')->get();
+      }
 
-
+      if($vendor){
       $nearest_shops = User::where('frenchise_id','=',$vendor->frenchise_id)->inRandomOrder()->limit(12)->get();
-
+  }
+  
+   if($vendor){   
       
     return response()->json([
       'status_code' => 200,
       'status' => 1,
       'data' => ["sliders"=>$sliders, "offers of the day"=>$offers_of_day, "discount items"=>$discount_items, "sale items"=>$sale_items, "nearest shops"=>$nearest_shops],
     ]);
+  }else{
+
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'data' => 'result not found',
+    ]);
+  }
 
     }
 
