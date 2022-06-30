@@ -256,7 +256,7 @@ class FrontendController extends Controller
       public function shops_details(Request $request,$slug)
     {
       $string = str_replace('-', ' ', $slug);
-      $vendor = User::all()->where('shop_name','=',$string)->first();
+      $vendor = User::all()->where('shop_name','=',$string)->where('is_vendor',2)->first();
       
       if($vendor){
       $sliders= $vendor->sliders;
