@@ -16,10 +16,22 @@ use App\Models\Review;
 
 class FrontendController extends Controller
 {
-     public function categories(Request $request)
+  //    public function categories(Request $request)
+  // {
+
+  //  	 $category= Category::with('subs')->get();
+
+  //     return response()->json([
+  //       'status_code' => 200,
+  //       'status' => 1,
+  //       'categories' => $category,
+  //     ]);
+  // }
+
+   public function categories(Request $request)
   {
 
-   	 $category= Category::with('subs')->get();
+     $category= Category::with(['subs','products'])->get();
 
       return response()->json([
         'status_code' => 200,
@@ -295,7 +307,7 @@ class FrontendController extends Controller
     return response()->json([
       'status_code' => 200,
       'status' => 1,
-      'data' => 'result not found',
+      'data' => [],
     ]);
   }
 
