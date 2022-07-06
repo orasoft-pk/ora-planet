@@ -117,6 +117,7 @@ Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthCont
 Route::get('/shops', 'App\Http\Controllers\API\Customer\FrontendController@shops');
 Route::get('/countries', 'App\Http\Controllers\API\Customer\FrontendController@countries');
 Route::get('/categories', 'App\Http\Controllers\API\Customer\FrontendController@categories');
+Route::get('/category_products/{id}', 'App\Http\Controllers\API\Customer\FrontendController@category_products');
 Route::get('/product_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@search');
 Route::get('/road_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@road_search');
 Route::get('/brands', 'App\Http\Controllers\API\Customer\FrontendController@brands');

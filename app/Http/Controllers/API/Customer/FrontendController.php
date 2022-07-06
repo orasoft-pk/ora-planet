@@ -11,24 +11,51 @@ use App\Models\Product;
 use App\Models\Page;
 use App\Models\State;
 use App\Models\Slider;
+use App\Models\Subcategory;
 use App\Models\Review;
 
 
 class FrontendController extends Controller
 {
-  //    public function categories(Request $request)
-  // {
+     public function category_products($id)
+  {
 
-  //  	 $category= Category::with('subs')->get();
+   	  $cat = Category::where('id','=',$id)->first();
+      $subcats=Subcategory::where('category_id','=',$id)->get();
+      // $cat->image_url=asset('assets/images/').'/'.$cat->photo;
 
-  //     return response()->json([
-  //       'status_code' => 200,
-  //       'status' => 1,
-  //       'categories' => $category,
-  //     ]);
-  // }
+        $cats = $cat->products()->where('status','=',1)->orderBy('id','desc')->get();
+        if(count($cats)==0)  
+        {
+         
+          return response()->json([
+            'status_code' => 500,
+            'status' => 0,
+            'message' => 'No product Found',
+            'products' => null,
+            'category' => $cat,
+            'subcats' => $subcats,
+            
+          ]);
+        }
+        
+        // foreach ($cats as $key) {
 
-   public function categories(Request $request)
+        //   $key->image_url=asset('assets/images/').'/'.$key->photo;
+        // }
+  
+    return response()->json([
+      'status_code' => 200,
+      'status' => 1,
+      'products'=>$cats,
+      'category'=>$cat,
+      'subcats'=>$subcats,
+
+    ]);
+       
+  }
+
+   public function categories_products(Request $request)
   {
 
      $category= Category::with(['subs','products'])->get();
