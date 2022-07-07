@@ -55,10 +55,10 @@ class FrontendController extends Controller
        
   }
 
-   public function categories_products(Request $request)
+   public function categories(Request $request)
   {
 
-     $category= Category::with(['subs','products'])->get();
+     $category= Category::with(['subs'])->get();
 
       return response()->json([
         'status_code' => 200,
