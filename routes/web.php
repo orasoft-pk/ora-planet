@@ -267,6 +267,10 @@ Route::prefix('admin')->group(function () {
       Route::post('/feature/{id}', 'App\Http\Controllers\ProductController@feature')->name('admin-prod-feature');
       Route::get('/delete/{id}', 'App\Http\Controllers\ProductController@destroy')->name('admin-prod-delete');
       Route::get('/status/{id1}/{id2}', 'App\Http\Controllers\ProductController@status')->name('admin-prod-st');
+
+
+       Route::get('/add_sale_tax', 'App\Http\Controllers\ProductController@add_sale_tax')->name('admin-sale-tax');
+       Route::post('/insert_sale_tax', 'App\Http\Controllers\ProductController@insert_sale_tax')->name('insert-sale-tax');
     });
 
     Route::prefix('category')->group(function () {

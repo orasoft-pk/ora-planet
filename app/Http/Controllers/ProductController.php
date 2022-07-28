@@ -932,4 +932,20 @@ class ProductController extends Controller
         Session::flash('success', 'Product deleted successfully.');
         return redirect()->back();
     }
+
+    public function add_sale_tax(Request $request)
+    {
+        $cats = Category::all();
+        $sign = Currency::where('is_default','=',1)->first();
+        return view('admin.saletax.add_sale_tax',compact('cats','sign'));
+    }
+
+    public function insert_sale_tax(Request $request)
+    {
+        return $request->all();
+        $cats = Category::all();
+        $sign = Currency::where('is_default','=',1)->first();
+        return view('admin.saletax.add_sale_tax',compact('cats','sign'));
+    }
+
 }
