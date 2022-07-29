@@ -43,6 +43,7 @@
 <div>
                                           @include('includes.form-error')
                                           @include('includes.form-success')
+                                          
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li class="active"><a href="#physical" role="tab" data-toggle="tab"> Physical</a>
@@ -55,6 +56,7 @@
       <div class="tab-pane fade active in" id="physical">
                                         <form class="form-horizontal" action="{{route('insert-sale-tax')}}" method="POST" enctype="multipart/form-data" id="form1">
                                           {{csrf_field()}}
+                                          @method('PATCH')
                                           
                                
                                           <div class="form-group">
@@ -89,7 +91,7 @@
                                           <div class="form-group">
                                             <label class="control-label col-sm-4" for="blood_group_display_name">Sale Tax* <span>(only numbers)</span></label>
                                             <div class="col-sm-6">
-                                              <input class="form-control" name="sale_tax" id="blood_group_display_name" placeholder="Enter Sale Tax" required="" type="number" >
+                                              <input class="form-control" name="sales_tax" id="blood_group_display_name" placeholder="Enter Sale Tax" required="" type="number" >
                                             </div>
                                           </div>
 

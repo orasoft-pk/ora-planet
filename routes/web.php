@@ -270,7 +270,7 @@ Route::prefix('admin')->group(function () {
 
 
        Route::get('/add_sale_tax', 'App\Http\Controllers\ProductController@add_sale_tax')->name('admin-sale-tax');
-       Route::post('/insert_sale_tax', 'App\Http\Controllers\ProductController@insert_sale_tax')->name('insert-sale-tax');
+       Route::patch('/insert_sale_tax', 'App\Http\Controllers\ProductController@insert_sale_tax')->name('insert-sale-tax');
     });
 
     Route::prefix('category')->group(function () {

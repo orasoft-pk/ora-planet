@@ -106,7 +106,6 @@ Route::get('/charges/leopard/{product}/{vendor}/{city}', 'App\Http\Controllers\S
 
 Route::get('/test', 'App\Http\Controllers\Shipping\LeopardsController@test');
 
-
 //Customer
 Route::post('/customer_register', 'App\Http\Controllers\API\Auth\CustomerAuthController@register');
 Route::post('/customer_login', 'App\Http\Controllers\API\Auth\CustomerAuthController@customerlogin');

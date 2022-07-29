@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\Childcategory;
 use App\Models\Gallery;
 use App\Models\Currency;
 use App\Models\User;
@@ -942,10 +944,22 @@ class ProductController extends Controller
 
     public function insert_sale_tax(Request $request)
     {
-        return $request->all();
-        $cats = Category::all();
-        $sign = Currency::where('is_default','=',1)->first();
-        return view('admin.saletax.add_sale_tax',compact('cats','sign'));
+        if($request->subcategory_id)
+        {
+            Subcategory::where('id',$request->subcategory_id)->update([
+                'sales_tax' => $request->sales_tax
+            ]);
+            return redirect()->route('admin-sale-tax')->with(['success'=>'Sales Tax added successfully']);
+        }
+
+        if($request->childcategory_id)
+        {
+            Childcategory::where('id',$request->childcategory_id)->update([
+                'sales_tax' => $request->sales_tax
+            ]);
+            return redirect()->route('admin-sale-tax')->with(['success'=>'Sales Tax added successfully']);
+        }
+        
     }
 
 }

@@ -9,7 +9,7 @@ class Childcategory extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['subcategory_id','child_name','child_slug','featured'];
+    protected $fillable = ['subcategory_id','child_name','child_slug','featured','sales_tax'];
     public $timestamps = false;
 
     public function subcategory()
