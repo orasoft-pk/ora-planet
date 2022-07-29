@@ -114,14 +114,6 @@
                                                 <h4>Net Income</h4>
                                             </a>
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                            <a  class="title-stats title-blue">
-                                                <div class="icon"><i class="fa fa-at fa-5x"></i></div>
-                                                <h4>0% of Sales Tax</h4> 
-                                                <div style="font-size: 38px; font-weight: 600;">{{$currency_sign->sign}}{{number_format((($detection*30)/100),2)}}</div>
-                                                <h4>Net Income</h4>
-                                            </a>
-                                        </div>
                                  
                                     </div>
                                 </div>
