@@ -179,6 +179,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="v3"> Sale Tax *</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" name="sale_tax" id="v3" placeholder="Sale Tax"   required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="v3"> Registration Tax *</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" name="registration_tax" id="v3" placeholder="Registration Tax"   required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="v3"> Other Expenses  *</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" name="other_expenses" id="v3" placeholder="Other Expenses"   required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
                                                     <label class="control-label col-sm-4" for="v3"> Name Of Vitnes *</label>
                                                     <div class="col-sm-6">
                                                         <input type="text" class="form-control" name="vitnes" id="v3" placeholder="Name Of Vitnes"   required>
