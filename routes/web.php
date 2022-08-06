@@ -267,6 +267,10 @@ Route::prefix('admin')->group(function () {
       Route::post('/feature/{id}', 'App\Http\Controllers\ProductController@feature')->name('admin-prod-feature');
       Route::get('/delete/{id}', 'App\Http\Controllers\ProductController@destroy')->name('admin-prod-delete');
       Route::get('/status/{id1}/{id2}', 'App\Http\Controllers\ProductController@status')->name('admin-prod-st');
+
+
+       Route::get('/add_sale_tax', 'App\Http\Controllers\ProductController@add_sale_tax')->name('admin-sale-tax');
+       Route::patch('/insert_sale_tax', 'App\Http\Controllers\ProductController@insert_sale_tax')->name('insert-sale-tax');
     });
 
     Route::prefix('category')->group(function () {
@@ -1002,7 +1006,7 @@ Route::get('/vendor/{slug1}/subcategory/{slug2}/{sort}', 'App\Http\Controllers\V
 Route::get('/vendor/{slug1}/childcategory/{slug2}', 'App\Http\Controllers\VendorFrontController@vendorchildcategory')->name('front.vendor.childcategory');
 Route::get('/vendor/{slug1}/childcategory/{slug2}/{sort}', 'App\Http\Controllers\VendorFrontController@vendorchildcategorysort');
 
-Route::get('auth/{provider}', 'App\Http\Controllers\Auth\SocialRegisterController@redirectToProvider')->name('social-provider');
+Route::get('auth', 'App\Http\Controllers\Auth\SocialRegisterController@redirectToProvider')->name('social-provider');
 Route::get('auth/{provider}/callback', 'App\Http\Controllers\Auth\SocialRegisterController@handleProviderCallback');
 
 
@@ -1045,6 +1049,11 @@ Route::get('/charges/leopard/{product}/{vendor}/{city}', 'App\Http\Controllers\S
 
 // Common Endpoints
 Route::post('/check/vendor/order/qty/qlty', 'App\Http\Controllers\CommonController@change_vendor_qty_qlty')->name('change_vendor_qty_qlty');
+
+
+ route::get('callback', 'App\Http\Controllers\Auth\SocialRegisterController@callbackFromGoogle');
+
+
 
 //Clear Cache facade value:
 Route::get('/clear-cache', function () {

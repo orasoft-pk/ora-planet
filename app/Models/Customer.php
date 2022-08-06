@@ -13,7 +13,7 @@ class Customer extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable = ['name','photo', 'zip', 'residency', 'city','password_api', 'address', 'phone', 'fax',
-        'email','password','f_url','g_url','t_url','l_url','f_check','g_check','t_check','l_check',];
+        'email','password','f_url','g_url','t_url','l_url','f_check','g_check','t_check','l_check', 'google_id'];
 
     protected $hidden = ['password', 'remember_token'];
 

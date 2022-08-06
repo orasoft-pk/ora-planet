@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use App\Models\SocialProvider;
 use App\Models\Sociallink; 
 use App\Models\User;
+use App\Models\Customer;
 use Auth;
 use Config;
 use Illuminate\Http\Request;
@@ -15,66 +15,44 @@ use Socialite;
 
 class SocialRegisterController extends Controller
 {
-
-    public function __construct()
+    public function redirectToProvider()
     {
-      $link = Sociallink::findOrFail(1);
-      Config::set('services.google.client_id', $link->gclient_id);
-      Config::set('services.google.client_secret', $link->gclient_secret);
-      Config::set('services.google.redirect', url('/auth/google/callback'));
-      Config::set('services.facebook.client_id', $link->fclient_id);
-      Config::set('services.facebook.client_secret', $link->fclient_secret);
-      $url = url('/auth/facebook/callback');
-      $url = preg_replace("/^http:/i", "https:", $url);
-      Config::set('services.facebook.redirect', $url);
+        return Socialite::driver('google')->redirect();
     }
 
-    public function redirectToProvider($provider)
+    public function callbackFromGoogle()
     {
-        return Socialite::driver($provider)->redirect();
+         try {
+      
+            $customer = Socialite::driver('google')->user();
+       
+            $findcustomer = Customer::where('google_id', $customer->id)->first();
+       
+            if($findcustomer){
+       
+                Auth::guard('customer')->login($findcustomer);
+      
+                // return redirect()->intended('dashboard');
+                 return redirect()->intended(route('customer-dashboard'));
+       
+            }else{
+                $newUser = Customer::create([
+                    'name' => $customer->name,
+                    'email' => $customer->email,
+                    'google_id'=> $customer->id
+                ]);
+      
+                Auth::guard('customer')->login($newUser);
+      
+                // return redirect()->intended('dashboard');
+                return redirect()->intended(route('customer-dashboard'));
+            }
+      
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
-    public function handleProviderCallback($provider)
-    {
-        try
-        {
-            $socialUser = Socialite::driver($provider)->user();
-        }
-        catch(\Exception $e)
-        {
-            return redirect('/');
-        }
-        //check if we have logged provider
-        $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
-        if(!$socialProvider)
-        {
 
-            //create a new user and provider
-            $user = new User;
-            $user->email = $socialUser->email;
-            $user->name = $socialUser->name;
-            $user->photo = $socialUser->avatar_original;
-            $user->is_provider = 1;
-            $user->affilate_code = $socialUser->name.$socialUser->email;
-            $user->affilate_code = md5($user->affilate_code);
-            $user->save();
 
-            $user->socialProviders()->create(
-                ['provider_id' => $socialUser->getId(), 'provider' => $provider]
-            );
-            $notification = new Notification;
-            $notification->user_id = $user->id;
-            $notification->save();
-
-        }
-        else
-        {
-
-            $user = $socialProvider->user;
-        }
-
-        Auth::guard('user')->login($user); 
-        return redirect()->route('user-dashboard');
-
-    }
 }

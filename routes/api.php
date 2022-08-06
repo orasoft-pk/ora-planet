@@ -52,8 +52,8 @@ Route::post('/userentercode', 'App\Http\Controllers\API\Auth\AuthController@user
 Route::post('/index', 'App\Http\Controllers\API\FrontendController@index');
 Route::get('/getcategories', 'App\Http\Controllers\API\FrontendController@getcategories');
 //festivals
-Route::get('/festivals', 'App\Http\Controllers\API\FrontendController@fastival');
-Route::post('/festivals', 'App\Http\Controllers\API\FrontendController@addfestivals');
+// Route::get('/festivals', 'App\Http\Controllers\API\FrontendController@fastival');
+// Route::post('/festivals', 'App\Http\Controllers\API\FrontendController@addfestivals');
 //top brand
 Route::get('/topbrand', 'App\Http\Controllers\API\FrontendController@topBrand');
 Route::post('/topbrand/{id}', 'App\Http\Controllers\API\FrontendController@topshopdetails');
@@ -106,10 +106,33 @@ Route::get('/charges/leopard/{product}/{vendor}/{city}', 'App\Http\Controllers\S
 
 Route::get('/test', 'App\Http\Controllers\Shipping\LeopardsController@test');
 
-
 //Customer
 Route::post('/customer_register', 'App\Http\Controllers\API\Auth\CustomerAuthController@register');
 Route::post('/customer_login', 'App\Http\Controllers\API\Auth\CustomerAuthController@customerlogin');
 Route::post('/customer_forgot', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_forgot');
 
 Route::post('/customer_profile', 'App\Http\Controllers\API\Auth\CustomerAuthController@customer_profile');
+
+Route::get('/shops', 'App\Http\Controllers\API\Customer\FrontendController@shops');
+Route::get('/countries', 'App\Http\Controllers\API\Customer\FrontendController@countries');
+Route::get('/categories', 'App\Http\Controllers\API\Customer\FrontendController@categories');
+Route::get('/category_products/{id}', 'App\Http\Controllers\API\Customer\FrontendController@category_products');
+Route::get('/product_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@search');
+Route::get('/road_search/{id}', 'App\Http\Controllers\API\Customer\FrontendController@road_search');
+Route::get('/brands', 'App\Http\Controllers\API\Customer\FrontendController@brands');
+Route::get('/festivels', 'App\Http\Controllers\API\Customer\FrontendController@festivels');
+Route::get('/about', 'App\Http\Controllers\API\Customer\FrontendController@about');
+Route::get('/groceries', 'App\Http\Controllers\API\Customer\FrontendController@groceries');
+Route::get('/home_sliders', 'App\Http\Controllers\API\Customer\FrontendController@sliders');
+Route::get('/featured_shops', 'App\Http\Controllers\API\Customer\FrontendController@featured_shops');
+Route::get('/hot_sale', 'App\Http\Controllers\API\Customer\FrontendController@hot_sale');
+Route::get('/deals_of_the_day', 'App\Http\Controllers\API\Customer\FrontendController@deals_of_the_day');
+Route::get('/shops_details/{slug}', 'App\Http\Controllers\API\Customer\FrontendController@shops_details');
+
+Route::get('/cities_shops/{slug}', 'App\Http\Controllers\API\Customer\FrontendController@cities_shops');
+
+
+Route::prefix('advance_search')->group(function () {
+Route::get('/', 'App\Http\Controllers\API\Customer\FrontendController@advance_search');
+Route::get('/product', 'App\Http\Controllers\API\Customer\FrontendController@productsearch');
+});

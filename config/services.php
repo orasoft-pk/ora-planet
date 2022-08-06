@@ -42,9 +42,9 @@ return [
     ],
 
     'google' => [ //change it to any provider
-        'client_id' => '',
-        'client_secret' => '',
-        'redirect' => '',
+        'client_id' => '112570018208-v7h2ei9u068uebldh9ov0576hs9l8b20.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost:8000/callback',
     ],
 
 ];

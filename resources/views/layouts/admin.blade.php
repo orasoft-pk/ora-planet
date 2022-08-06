@@ -92,6 +92,9 @@
                                         <li>
                                             <a href="{{route('admin-prod-deactive')}}"><i class="fa fa-angle-right"></i>Deactivated Products</a>
                                         </li>
+                                        <li>
+                                            <a href="{{route('admin-sale-tax')}}"><i class="fa fa-angle-right"></i>Add Sale Tax</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
